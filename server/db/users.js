@@ -10,9 +10,9 @@ import bcrypt from  "bcrypt"
     })
 }
 
-export const getUserBuyUserName=(userName)=>{
+export const getUserBuyUserName = async (userName)=>{
     return prisma.user.findUnique({
-        where :{
+        where: {
             userName
         }
     })

@@ -3,7 +3,8 @@ import {decodeAccessToken} from "~/server/utils/jwt";
 import {getUserById} from "~/server/db/users";
 export default  defineEventHandler(async (event)=>{
     const endpoints=[
-        '/api/auth/user'
+        '/api/auth/user',
+        '/api/user/tweets',
     ]
     const isHandleByThisMiddleware = endpoints.some(endpoint=>{
         const pattern = new UrlPattern(endpoint)
@@ -22,10 +23,9 @@ export default  defineEventHandler(async (event)=>{
     }
     try {
         const userId = decoded.userId
-        const user = await  getUserById(userId)
+        const user = await getUserById(userId)
         event.context.auth = {user}
-
     }catch (error){
-    return
+        return null;
     }
 })

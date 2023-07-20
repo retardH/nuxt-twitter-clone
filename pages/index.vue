@@ -1,6 +1,8 @@
 <template>
 <MainSection title="Home" :loading="loading">
-  {{user}}
+<!--{{user}}-->
+  <br/>
+  <tweet-form :user="user"/>
 </MainSection>
 </template>
 <script setup>
