@@ -1,8 +1,10 @@
 <template>
   <div :class="{'dark':darkMode}">
     <div class="bg-white dark:bg-dim-900">
+<!--      Loading -->
+      <LoadingPage v-if="isAuthLoading" />
 <!--      App-->
-      <div v-if="false" class="min-h-full" >
+      <div v-else-if="user" class="min-h-full" >
         <div class="grid grid-cols-12 mx-auto sm:px-6 lg:px-8 lg:max-w-7xl  lg:gap-5" >
           <!--        Left side bar-->
           <div class="hidden md:block   xl:col-span-2 col-span-1" >
@@ -26,13 +28,21 @@
       </div>
 
 <!--Auth page-->
-      <AuthPage/>
+      <AuthPage v-else />
     </div>
   </div>
 </template>
 
 <script setup >
+
+
+import LoadingPage from "~/components/UI/LoadingPage.vue";
+
 const darkMode = ref(false)
-
-
+const {useAuthUser,initAuth,useAuthLoading} = useAuth()
+const isAuthLoading = useAuthLoading();
+const user = useAuthUser();
+onBeforeMount(() => {
+  initAuth()
+})
 </script>

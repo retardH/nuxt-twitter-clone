@@ -17,3 +17,12 @@ export const getUserBuyUserName=(userName)=>{
         }
     })
 }
+
+
+export const getUserById = (userId)=>{
+    return prisma.user.findUnique({
+        where:{
+           id: userId
+        }
+    })
+}

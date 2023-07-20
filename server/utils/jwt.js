@@ -22,8 +22,26 @@ export  const generateTokens=(user)=>{
 }
 
 export const sendRefreshToken = (event,token)=>{
-    setCookie(event.node.res,"refresh_token",token,{
+    setCookie(event,"refresh_token",token,{
         httpOnly:true,
         sameSite:true
     })
+}
+
+export const decodeRefreshToken = (token)=>{
+    const config = useRuntimeConfig
+    try {
+        return jwt.verify(token,config().jwtRefreshSecret)
+    }catch (error){
+    return  null
+    }
+}
+
+export const decodeAccessToken = (token)=>{
+    const config = useRuntimeConfig
+    try {
+        return jwt.verify(token,config().jwtAccessSecret)
+    }catch (error){
+        return  null
+    }
 }
