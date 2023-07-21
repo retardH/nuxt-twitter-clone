@@ -1,4 +1,5 @@
 import {getTweets} from "~/server/db/tweets";
+import {tweetTransformer} from "~/server/transformers/tweets";
 
 export default defineEventHandler(async (event) => {
 
@@ -10,6 +11,6 @@ export default defineEventHandler(async (event) => {
     });
 
     return {
-       tweets: tweets
+       tweets: tweets.map(tweetTransformer)
     }
 })
