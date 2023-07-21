@@ -96,9 +96,10 @@ export default () => {
                 await getUser()
                 reFreshAccessToken()
                 resolve(true)
-                setIsAuthLoading(false)
             } catch (error) {
                 reject(error)
+            } finally {
+                setIsAuthLoading(false);
             }
         })
     }
