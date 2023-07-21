@@ -10,7 +10,6 @@ export default () => {
             body: form,
         })
     }
-
     return {
         postTweet
     }

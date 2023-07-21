@@ -1,6 +1,6 @@
 <template>
 <div  class="h-screen flex flex-col ">
-  <div class="p-2 my-2 hover:bg-blue-50 rounded-full dark:hover:bg-white/20 w-min  "  :class="defaultTransition" >
+  <div class="py-2 px-1 my-2 hover:bg-blue-50 rounded-full dark:hover:bg-white/20 w-min  "  :class="defaultTransition" >
     <nuxt-link to="/">
       <div class="w-8 h-8" >
         <LogoTwitter/>
@@ -75,6 +75,20 @@
        More
       </template>
     </SideBarLeftTab>
+    <div class="w-full hidden xl:block">
+      <u-i-button size="lg" liquid>
+        <strong>
+          Tweet
+        </strong>
+      </u-i-button>
+    </div>
+    <div class="w-full xl:hidden">
+      <u-i-button>
+        <div class="w-6 h-6 font-bold">
+          <PencilIcon/>
+        </div>
+      </u-i-button>
+    </div>
   </div>
 
 </div>
@@ -83,7 +97,8 @@
 
 import useTailwindConfig from "~/composables/useTailwindConfig";
 import {HomeIcon  }  from "@heroicons/vue/24/solid"
-import {EllipsisHorizontalCircleIcon ,BellIcon,MagnifyingGlassIcon,EnvelopeIcon,UserIcon,UsersIcon ,DocumentTextIcon}  from  "@heroicons/vue/24/outline"
+import {EllipsisHorizontalCircleIcon ,BellIcon,MagnifyingGlassIcon,EnvelopeIcon,UserIcon,UsersIcon
+  ,DocumentTextIcon, PencilIcon}  from  "@heroicons/vue/24/outline"
 
 const { defaultTransition } = useTailwindConfig()
 </script>
