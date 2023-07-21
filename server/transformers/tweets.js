@@ -8,6 +8,6 @@ export const tweetTransformer = (tweet) => {
         mediaFiles: tweet.mediaFile ? tweet.mediaFile.map(mediaFileTransformer) : [],
         author: !!tweet.author ? userTransformer(tweet.author) : null,
         replies: !!tweet.replies ? tweet.replies.map(tweetTransformer) : [],
-        replayTo: !!tweet.replyTo ? tweetTransformer(tweet.replyTo) : null
+        replyTo: !!tweet.replyTo ? tweetTransformer(tweet.replyTo) : null
     }
 }
