@@ -8,14 +8,15 @@
         <textarea
             v-model="text"
             class="w-full h-10 py-0 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text-white focus:ring-0"
-            placeholder="What's on your mind"/>
+            :placeholder="props.placeholder"/>
       </div>
 
     </div>
     <!-- img selector -->
     <div class="p-4 pl-16">
       <img :src="inputImageUrl" alt="" v-if="inputImageUrl" class="rounded-2xl border" :class="twitterBorderColor"/>
-      <input type="file" hidden ref="imageFileSelectRef" accept="image/png, image/gif" @change="handleImageChange"/>
+      <input type="file" hidden ref="imageFileSelectRef" accept="image/png, image/gif, image/jpg, image/jpeg"
+             @change="handleImageChange"/>
     </div>
     <div class="flex p-2 pl-14">
       <div class="flex w-full text-white">
@@ -105,6 +106,10 @@ const props = defineProps({
   user: {
     type: Object,
     required: true
+  },
+  placeholder: {
+    type: String,
+    default: "What's happening today?"
   }
 })
 const handleClick = () => {

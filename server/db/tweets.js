@@ -16,7 +16,7 @@ export const getTweetById = (id, params = {}) => {
     return prisma.tweet.findUnique({
         ...params,
         where: {
-            // ...params.where,
+            ...params.where,
             id: id
         },
     })

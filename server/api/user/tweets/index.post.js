@@ -3,6 +3,7 @@ import {createTweet} from "~/server/db/tweets";
 import {tweetTransformer} from "~/server/transformers/tweets";
 import {createMediaFile} from "~/server/db/mediaFiles";
 import {uploadToCloudinary} from "~/server/utils/cloudinary";
+
 export default defineEventHandler(async (event)=>{
     const form = formidable({});
     const response = await new Promise((resolve, reject) => {
@@ -20,23 +21,24 @@ export default defineEventHandler(async (event)=>{
         text: fields.text[0],
     }
     console.log('fields',fields);
-    const replyTo = fields.replyTo[0];
-    if(replyTo) {
-        tweetData.replyToId = replyTo
+    console.log('files', files);
+    if(fields.replyTo) {
+        tweetData.replyToId = fields.replyTo[0]
     }
     const tweet = await createTweet(tweetData);
-    const filePromises = Object.keys(files).map(async key => {
-        const file = files[key][0];
-        const cloudinaryResource = await uploadToCloudinary(file.filepath);
-        console.log(cloudinaryResource);
-        return createMediaFile({
-            url: cloudinaryResource.secure_url,
-            providerPublicId: cloudinaryResource.public_id,
-            userId: userId,
-            tweetId: tweet.id
+    if(files) {
+        const filePromises = Object.keys(files).map(async key => {
+            const file = files[key][0];
+            const cloudinaryResource = await uploadToCloudinary(file.filepath);
+            return createMediaFile({
+                url: cloudinaryResource.secure_url,
+                providerPublicId: cloudinaryResource.public_id,
+                userId: userId,
+                tweetId: tweet.id
+            })
         })
-    })
-    await Promise.all(filePromises);
+        await Promise.all(filePromises);
+    }
     return {
         tweet: tweetTransformer(tweet)
     }

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-if="loading" class="flex items-center justify-center">
-      <u-i-spinner />
+      <UISpinner />
     </div>
     <div v-else>
-      <tweet-form-input :user="props.user" @on-submit="handleFormSubmit"/>
+      <TweetFormInput :user="props.user" @on-submit="handleFormSubmit" :placeholder="props.placeholder"/>
     </div>
   </div>
 </template>
@@ -12,10 +12,18 @@
 <script setup>
 const {postTweet} = useTweets();
 const loading = ref(false);
+const emits = defineEmits(['onSuccess']);
 const props = defineProps({
   user: {
     type: Object,
     required: true,
+  },
+  placeholder: {
+    type: String
+  },
+  replyTo: {
+    type: Object,
+    default: null
   }
 })
 const handleFormSubmit = async (data) => {
@@ -23,9 +31,10 @@ const handleFormSubmit = async (data) => {
   try {
     const response = await postTweet({
       text: data.text,
-      mediaFiles: data.mediaFiles
+      mediaFiles: data.mediaFiles,
+      replyTo: props.replyTo?.id
     });
-    alert(JSON.stringify(response));
+    emits('onSuccess', response.tweet);
   } catch (error) {
     console.log(error);
   } finally {

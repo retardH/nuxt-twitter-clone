@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-around w-full">
-    <TweetItemActionsIcon color="blue">
+    <TweetItemActionsIcon color="blue" :size="size">
       <template v-slot:icon="{classes}">
         <ChatBubbleOvalLeftIcon :class="classes"/>
       </template>
@@ -8,7 +8,7 @@
         {{props.tweet.repliesCount}}
       </template>
     </TweetItemActionsIcon>
-    <TweetItemActionsIcon color="green">
+    <TweetItemActionsIcon color="green" :size="size">
       <template v-slot:icon="{classes}">
         <ArrowPathIcon :class="classes"/>
       </template>
@@ -16,7 +16,7 @@
         {{generateRandomNumber()}}
       </template>
     </TweetItemActionsIcon>
-    <TweetItemActionsIcon color="red">
+    <TweetItemActionsIcon color="red" :size="size">
       <template v-slot:icon="{classes}">
         <HeartIcon :class="classes"/>
       </template>
@@ -24,7 +24,7 @@
         {{generateRandomNumber()}}
       </template>
     </TweetItemActionsIcon>
-    <TweetItemActionsIcon color="yellow">
+    <TweetItemActionsIcon color="yellow" :size="size">
       <template v-slot:icon="{classes}">
         <ArrowUpTrayIcon :class="classes"/>
       </template>
@@ -41,9 +41,15 @@ const props = defineProps({
   tweet: {
     type: Object,
     required: true
+  },
+  compact: {
+    type: Boolean,
+    default: false
   }
 })
 const generateRandomNumber = () => {
   return Math.floor(Math.random() * 100);
 }
+
+const size = computed(() => props.compact ? 5 : 8);
 </script>
