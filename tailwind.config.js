@@ -9,6 +9,12 @@ module.exports = {
     "./app.vue",
   ],
   darkMode:'class',
+  safelist: [
+    {
+      pattern: /text-(red|green|blue|yellow)-(100|400)/,
+      variants: ['group-hover'],
+    }
+  ],
   theme: {
     screens:{
       xs:"614px",

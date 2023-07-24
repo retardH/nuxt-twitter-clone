@@ -62,18 +62,6 @@ export default () => {
         })
     }
 
-    // const reRefreshAccessToken = () => {
-    //     const authToken = useAuthToken()
-    //     if (!authToken.value) {
-    //         return
-    //     }
-    //     const jwt = jwtDecode(authToken.value)
-    //     const newRefreshTime = jwt.exp - 6000
-    //     setTimeout(async () => {
-    //         await refreshToken()
-    //         reRefreshAccessToken()
-    //     }, newRefreshTime)
-    // }
     const reFreshAccessToken = () => {
         const authToken = useAuthToken();
         if(!authToken) {

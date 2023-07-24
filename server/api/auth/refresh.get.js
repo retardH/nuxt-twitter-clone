@@ -11,7 +11,7 @@ export default  defineEventHandler(async (event)=>{
             statusCode:401
         }))
     }
-    const rToken = await  getRefreshTokenByToken(refreshToken)
+    const rToken = await getRefreshTokenByToken(refreshToken)
     const token = decodeRefreshToken(refreshToken)
 
     try {

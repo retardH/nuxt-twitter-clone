@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <div v-if="isEmptyArray" class="p-4">
+      <p class="text-center text-gray-500">
+        No Tweets :(
+      </p>
+    </div>
+    <div class="pb-4 border-b hover:bg-gray-50 dark:hover:bg-dim-400 cursor-pointer" :class="[twitterBorderColor,
+    defaultTransition]"
+         v-for="tweet
+     in props.tweets"
+         :key="tweet.id">
+      <TweetItem :tweet="tweet"/>
+    </div>
+  </div>
+</template>
+
+<script setup>
+const {twitterBorderColor, defaultTransition} = useTailwindConfig();
+const props = defineProps({
+  tweets: {
+    type: Array,
+    required: true
+  }
+})
+const isEmptyArray = computed(() => props.tweets.length === 0);
+</script>

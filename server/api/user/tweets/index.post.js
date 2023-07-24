@@ -3,7 +3,6 @@ import {createTweet} from "~/server/db/tweets";
 import {tweetTransformer} from "~/server/transformers/tweets";
 import {createMediaFile} from "~/server/db/mediaFiles";
 import {uploadToCloudinary} from "~/server/utils/cloudinary";
-
 export default defineEventHandler(async (event)=>{
     const form = formidable({});
     const response = await new Promise((resolve, reject) => {
@@ -20,12 +19,12 @@ export default defineEventHandler(async (event)=>{
         authorId: userId,
         text: fields.text[0],
     }
-    const replyTo = fields.replyTo;
-    if(replyTo !== null) {
+    console.log('fields',fields);
+    const replyTo = fields.replyTo[0];
+    if(replyTo) {
         tweetData.replyToId = replyTo
     }
     const tweet = await createTweet(tweetData);
-    console.log(tweet);
     const filePromises = Object.keys(files).map(async key => {
         const file = files[key][0];
         const cloudinaryResource = await uploadToCloudinary(file.filepath);
@@ -39,6 +38,6 @@ export default defineEventHandler(async (event)=>{
     })
     await Promise.all(filePromises);
     return {
-        Hello: tweetTransformer(tweet)
+        tweet: tweetTransformer(tweet)
     }
 })

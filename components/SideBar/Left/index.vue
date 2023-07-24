@@ -40,7 +40,6 @@
         Messages
       </template>
     </SideBarLeftTab>
-
     <SideBarLeftTab >
       <template #icon>
        <DocumentTextIcon/>
@@ -57,7 +56,6 @@
         Communities
       </template>
     </SideBarLeftTab>
-
     <SideBarLeftTab >
       <template #icon>
        <UserIcon/>
@@ -76,29 +74,27 @@
       </template>
     </SideBarLeftTab>
     <div class="w-full hidden xl:block">
-      <u-i-button size="lg" liquid>
+      <UIButton size="lg" liquid>
         <strong>
           Tweet
         </strong>
-      </u-i-button>
+      </UIButton>
     </div>
     <div class="w-full xl:hidden">
-      <u-i-button>
-        <div class="w-6 h-6 font-bold">
+      <UIButton>
+        <div class="w-6 h-6 font-bold rounded-full">
           <PencilIcon/>
         </div>
-      </u-i-button>
+      </UIButton>
     </div>
   </div>
 
 </div>
 </template>
 <script setup >
-
 import useTailwindConfig from "~/composables/useTailwindConfig";
-import {HomeIcon  }  from "@heroicons/vue/24/solid"
+import {HomeIcon}  from "@heroicons/vue/24/solid"
 import {EllipsisHorizontalCircleIcon ,BellIcon,MagnifyingGlassIcon,EnvelopeIcon,UserIcon,UsersIcon
   ,DocumentTextIcon, PencilIcon}  from  "@heroicons/vue/24/outline"
-
 const { defaultTransition } = useTailwindConfig()
 </script>

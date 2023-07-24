@@ -22,11 +22,8 @@
               <SideBarRight/>
             </div>
           </div>
-
         </div>
-
       </div>
-
       <!--Auth page-->
       <AuthPage v-else/>
     </div>

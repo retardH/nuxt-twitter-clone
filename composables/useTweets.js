@@ -10,7 +10,20 @@ export default () => {
             body: form,
         })
     }
+    const getTweets = () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await useFetchApi('/api/tweets', {
+                    method: 'GET',
+                });
+                resolve(response);
+            } catch (e) {
+                reject(e);
+            }
+        })
+    }
     return {
-        postTweet
+        postTweet,
+        getTweets
     }
 }
